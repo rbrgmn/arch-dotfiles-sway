@@ -31,7 +31,7 @@ function msg_error() {
 function msg_warning() {
     local MSG=${1}
     if [ "${MSG}" ]; then
-        echo -e "\e[33m<ERROR>\e[0m\t\e[39m${MSG}\e[0m"
+        echo -e "\e[33m<WARNING>\e[0m\t\e[39m${MSG}\e[0m"
     fi
 }
 
