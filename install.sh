@@ -2,7 +2,7 @@
 
 #  AUTHOR: RBRGMN <roman.bergman@tutanota.com>
 #    DATE: 2023-11-28
-# RELEASE: 0.0.7
+# RELEASE: 0.0.8
 
 
 
@@ -90,6 +90,7 @@ function install_system_pkg() {
 # INIT
 check_arch_os
 check_root_permissions
+pacman_parralel_downloads
 # sudo_password
 install_sway_pkg
 install_system_pkg
