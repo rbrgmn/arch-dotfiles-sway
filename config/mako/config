@@ -14,4 +14,3 @@ group-by=summary
 
 [grouped]
 format=<b>%s</b>\n%b
-2
