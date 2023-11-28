@@ -2,7 +2,7 @@
 
 #  AUTHOR: RBRGMN <roman.bergman@tutanota.com>
 #    DATE: 2023-11-28
-# RELEASE: 0.0.9
+# RELEASE: 0.0.10
 
 
 
@@ -59,6 +59,7 @@ function pacman_parralel_downloads() {
 }
 
 function install_sway_pkg() {
+    msg_info "Install SwayWM Packages"
     sudo pacman -Sy --noconfirm \
         sway \
         wofi \
@@ -66,10 +67,12 @@ function install_sway_pkg() {
         swaybg \
         waybar \
         swayidle \
-        swaylock > /dev/null
+        swaylock 2&> /dev/null
+    msg_ok "Installed SwayWM Packages"
 }
 
 function install_system_pkg() {
+    msg_info "Install System Packages"
     sudo pacman -Sy --noconfirm \
         grim \
         mako \
@@ -84,15 +87,16 @@ function install_system_pkg() {
         brightnessctl \
         pipewire-pulse \
         xdg-desktop-portal \
-        xdg-desktop-portal-wlr > /dev/null
+        xdg-desktop-portal-wlr 2&> /dev/null
+    msg_ok "Installed System Packages"
 }
 
 function create_user_directory() {
-    baseUserDirectory="Pictures" "Downloads" "Documents"
+    baseUserDirectory="Pictures Downloads Documents"
     for user_directory in ${baseUserDirectory}; do
         if [ ! -d "${HOME}/${user_directory}" ]; then
             mkdir ${HOME}/${user_directory}
-	        msg_ok "Directory create: ${HOME}/${user_directory}"
+	        msg_ok "Create directory: ${HOME}/${user_directory}"
 	    else
 	        msg_info "Directory exists: ${HOME}/${user_directory}"
 	    fi
