@@ -105,7 +105,7 @@ function create_user_directory() {
             mkdir ${HOME}/${user_directory}
 	        msg_ok "Create directory: ${HOME}/${user_directory}"
 	    else
-	        msg_info "Directory exists: ${HOME}/${user_directory}"
+	        msg_warning "Directory exists: ${HOME}/${user_directory}"
 	    fi
     done
 }
@@ -117,7 +117,7 @@ function symlink_config() {
             ln -s ${PWD}/config/${config_dir} ${HOME}/.config/${config_dir}
             msg_ok "Create symlink for: ${config_dir}"
         else
-            msg_error "Symlink exists: ${config_dir}"
+            msg_warning "Symlink exists: ${config_dir}"
         fi 
     done
 }
