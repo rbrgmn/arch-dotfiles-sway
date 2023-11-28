@@ -122,6 +122,16 @@ function symlink_config() {
     done
 }
 
+function systemd_sway_session() {
+    if [ ! -f "/etc/systemd/user/sway-session.target" ]; then
+        sudo ln -s ${HOME}/.config/sway/systemd/user/sway-session.target /etc/systemd/user/
+	    sudo systemctl daemon-reload
+	    msg_ok "Sway systemd service create."
+    else
+        msg_info "Sway systemd service is exists." 
+    fi
+}
+
 function systemd_mako_service() {
     if [ ! -f "/etc/systemd/user/mako.service" ]; then
         sudo ln -s ${HOME}/.config/mako/systemd/user/mako.service /etc/systemd/user/
@@ -133,7 +143,16 @@ function systemd_mako_service() {
     fi
 }
 
-
+function systemd_kanshi_service() {
+    if [ ! -f "/etc/systemd/user/kanshi.service" ]; then
+        sudo ln -s ${HOME}/.config/kanshi/systemd/user/kanshi.service /etc/systemd/user/
+        sudo systemctl daemon-reload
+        systemctl --user enable kanshi
+        msg_info "Kanshi service create"
+    else
+        msg_warning "Kanshi service is exists"
+    fi
+}
 
 
 
@@ -147,4 +166,7 @@ install_system_pkg
 create_user_directory
 
 symlink_config
+
+systemd_sway_session
 systemd_mako_service
+systemd_kanshi_service
