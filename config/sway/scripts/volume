@@ -1,0 +1,44 @@
+#!/bin/env bash
+
+#  AUTHOR: RBRGMN <roman.bergman@tutanota.com>
+#    DATE: 2023-11-28
+# VERSION: 0.2.2
+
+
+SELF_NOTIFY_TIMEOUT=2000
+SELF_NOTIFY_APP="  Volume"
+
+
+notify() {
+    VOLUME_LEVEL=${1}
+
+    notify-send -t ${SELF_NOTIFY_TIMEOUT} \
+                -a ${SELF_NOTIFY_APP} \
+	            "Volume: ${VOLUME_LEVEL}%" \
+	            --hint="int:value:${VOLUME_LEVEL}"
+}
+
+
+_ACTION=${1:-up}
+_VALUE=${2:-5}
+
+
+if [ "$_ACTION" == "up" ]; then
+    _VOLUME=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{printf $5}' | sed 's/\%//')
+    if [ $_VOLUME -lt 96 ]; then
+        pactl set-sink-volume @DEFAULT_SINK@ +$_VALUE%
+        notify $(($_VOLUME+5))
+    fi
+elif [ "$_ACTION" == "down" ]; then
+    pactl set-sink-volume @DEFAULT_SINK@ -$_VALUE%
+    notify $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{printf $5}' | sed 's/\%//')
+elif [ "$_ACTION" == "mute" ]; then
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+    if [ $(pactl get-sink-mute @DEFAULT_SINK@ | awk '{printf $2}') == "yes" ]; then
+        notify 0
+    else
+        notify $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{printf $5}' | sed 's/\%//')
+    fi
+elif [ "$_ACTION" == "mic-mute" ]; then
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle
+fi
