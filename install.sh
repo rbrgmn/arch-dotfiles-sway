@@ -83,13 +83,13 @@ function install_system_pkg() {
         wl-clipboard \
         brightnessctl \
         pipewire-pulse \
-        xdg-desktop-session \
-        xdg-desktop-session-wlr > /dev/null
+        xdg-desktop-portal \
+        xdg-desktop-portal-wlr > /dev/null
 }
 
 # INIT
 check_arch_os
 check_root_permissions
-sudo_password
+# sudo_password
 install_sway_pkg
 install_system_pkg
