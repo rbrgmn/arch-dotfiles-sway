@@ -103,6 +103,19 @@ function create_user_directory() {
     done
 }
 
+function symlink_config() {
+    configDirectories="sway"
+    for config_dir in ${configDirectories}; do
+        if [ ! -d "${HOME}/.config/${config_dir}" ]; then
+            ln -s ${PWD}/config/${config_dir} ${HOME}/.config/${config_dir}
+            msg_ok "Create symlink for: ${config_dir}"
+        else
+            msg_error "Symlink exists: ${config_dir}"
+        fi 
+    done
+}
+
+
 
 
 # INIT
@@ -113,3 +126,4 @@ pacman_parralel_downloads
 install_sway_pkg
 install_system_pkg
 create_user_directory
+symlink_config
