@@ -122,6 +122,18 @@ function symlink_config() {
     done
 }
 
+function systemd_mako_service() {
+    if [ ! -f "/etc/systemd/user/mako.service" ]; then
+        sudo ln -s ${HOME}/.config/mako/systemd/user/mako.service /etc/systemd/user/
+        sudo systemctl daemon-reload
+        systemctl --user enable mako
+        msg_ok "Mako service create"
+    else
+        msg_warning "Mako service is exists" 
+    fi
+}
+
+
 
 
 
@@ -133,4 +145,6 @@ pacman_parralel_downloads
 install_sway_pkg
 install_system_pkg
 create_user_directory
+
 symlink_config
+systemd_mako_service
