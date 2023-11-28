@@ -2,7 +2,7 @@
 
 #  AUTHOR: RBRGMN <roman.bergman@tutanota.com>
 #    DATE: 2023-11-28
-# RELEASE: 0.0.8
+# RELEASE: 0.0.9
 
 
 
@@ -55,7 +55,7 @@ function check_arch_os() {
 }
 
 function pacman_parralel_downloads() {
-    sudo sed -i '/ParallelDownloads/c\ParallelDownloads=66' /etc/pacman.conf
+    sudo sed -i '/ParallelDownloads/c\ParallelDownloads=10' /etc/pacman.conf
 }
 
 function install_sway_pkg() {
@@ -87,6 +87,20 @@ function install_system_pkg() {
         xdg-desktop-portal-wlr > /dev/null
 }
 
+function create_user_directory() {
+    baseUserDirectory="Pictures" "Downloads" "Documents"
+    for user_directory in ${baseUserDirectory}; do
+        if [ ! -d "${HOME}/${user_directory}" ]; then
+            mkdir ${HOME}/${user_directory}
+	        msg_ok "Directory create: ${HOME}/${user_directory}"
+	    else
+	        msg_info "Directory exists: ${HOME}/${user_directory}"
+	    fi
+    done
+}
+
+
+
 # INIT
 check_arch_os
 check_root_permissions
@@ -94,3 +108,4 @@ pacman_parralel_downloads
 # sudo_password
 install_sway_pkg
 install_system_pkg
+create_user_directory
