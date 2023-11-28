@@ -75,7 +75,7 @@ function install_system_pkg() {
         mako \
         kitty \
         slurp \
-        kanshy \
+        kanshi \
         mandoc \
         pipewire \
         libnotify \
