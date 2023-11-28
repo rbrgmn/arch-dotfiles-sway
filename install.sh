@@ -10,28 +10,28 @@
 function msg_info() {
     local MSG=${1}
     if [ "${MSG}" ]; then
-        echo -e "\e[34m<INFO>\e[0m\t\e[30m${MSG}\e[0m"
+        echo -e "\e[34m<INFO>\e[0m\t\e[39m${MSG}\e[0m"
     fi
 }
 
 function msg_ok() {
     local MSG=${1}
     if [ "${MSG}" ]; then
-        echo -e "\e[32m<OK>\e[0m\t\e[30m${MSG}\e[0m"
+        echo -e "\e[32m<OK>\e[0m\t\e[39m${MSG}\e[0m"
     fi
 }
 
 function msg_error() {
     local MSG=${1}
     if [ "${MSG}" ]; then
-        echo -e "\e[31m<ERROR>\e[0m\t\e[30m${MSG}\e[0m"
+        echo -e "\e[31m<ERROR>\e[0m\t\e[39m${MSG}\e[0m"
     fi
 }
 
 function msg_input() {
     local MSG=${1}
     if [ "${MSG}" ]; then
-        echo -e "\e[33m<INPUT>\e[0m\t\e[30m${MSG}\e[0m"
+        echo -e "\e[33m<INPUT>\e[0m\t\e[39m${MSG}\e[0m"
     fi
 }
 
@@ -70,7 +70,7 @@ function install_sway_pkg() {
 }
 
 function install_system_pkg() {
-    sudo pacman -Sy --nocorfirm \
+    sudo pacman -Sy --noconfirm \
         grim \
         mako \
         kitty \
