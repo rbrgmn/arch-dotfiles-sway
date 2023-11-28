@@ -92,7 +92,7 @@ function install_system_pkg() {
 }
 
 function create_user_directory() {
-    baseUserDirectory="Pictures Downloads Documents"
+    baseUserDirectory=".config Pictures Downloads Documents"
     for user_directory in ${baseUserDirectory}; do
         if [ ! -d "${HOME}/${user_directory}" ]; then
             mkdir ${HOME}/${user_directory}
