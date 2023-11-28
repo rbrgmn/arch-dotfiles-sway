@@ -1,0 +1,8 @@
+#  AUTHOR: RBRGMN <roman.bergman@tutanota.com>
+#    DATE: 2023-11-28
+# RELEASE: 0.0.1
+
+
+# --> INCLUDE <-- #
+
+include ${HOME}/.config/sway/sway.d/*.conf
