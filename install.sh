@@ -28,6 +28,13 @@ function msg_error() {
     fi
 }
 
+function msg_warning() {
+    local MSG=${1}
+    if [ "${MSG}" ]; then
+        echo -e "\e[33m<ERROR>\e[0m\t\e[39m${MSG}\e[0m"
+    fi
+}
+
 function msg_input() {
     local MSG=${1}
     if [ "${MSG}" ]; then
