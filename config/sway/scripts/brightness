@@ -1,0 +1,32 @@
+#!/bin/env bash
+
+#  AUTHOR: RBRGMN <roman.bergman@tutanota.com>
+#    DATE: 2023-05-29
+# RELEASE: 0.2.4
+
+
+SELF_NOTIFY_TIMEOUT=2000
+SELF_NOTIFY_APP=" Brightness"
+
+
+notify() {
+    BRIGHTNESS_LEVEL=${1}
+    
+    notify-send -t ${SELF_NOTIFY_TIMEOUT} \
+        -a ${SELF_NOTIFY_APP} \
+        "Brightness: ${BRIGHTNESS_LEVEL}%" \
+        --hint="int:value:${BRIGHTNESS_LEVEL}"
+}
+
+
+_ACTION=${1:-up}
+_VALUE=${2:-5}
+
+
+if [ "$_ACTION" == "up" ]; then
+    brightnessctl set $_VALUE%+
+    notify $(brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}')
+elif [ "$_ACTION" == "down" ]; then
+    brightnessctl set $_VALUE%-
+    notify $(brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}')
+fi
