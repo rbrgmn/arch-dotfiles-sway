@@ -111,7 +111,7 @@ function create_user_directory() {
 }
 
 function symlink_config() {
-    configDirectories="kanshi mako sway wofi"
+    configDirectories="kanshi mako sway swaylock wofi"
     for config_dir in ${configDirectories}; do
         if [ ! -d "${HOME}/.config/${config_dir}" ]; then
             ln -s ${PWD}/config/${config_dir} ${HOME}/.config/${config_dir}
